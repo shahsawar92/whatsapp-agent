@@ -1,5 +1,5 @@
 import type { Content, FunctionDeclaration } from "@google/genai";
-import { gemini, MODEL } from "@/lib/gemini";
+import { generate, MODEL } from "@/lib/gemini";
 import { CUSTOMERS, ORDERS, STORE, type Customer } from "@/lib/store";
 
 /** One step of the audit trail shown beside the chat. */
@@ -104,7 +104,6 @@ export function runOrderTool(args: Record<string, unknown>, customer: Customer) 
 
 export async function runAgent(history: ChatTurn[], customerId: string) {
   const customer = CUSTOMERS.find((c) => c.id === customerId) ?? CUSTOMERS[0];
-  const ai = gemini();
   const trace: TraceStep[] = [];
 
   const contents: Content[] = history.map((t) => ({
@@ -115,8 +114,7 @@ export async function runAgent(history: ChatTurn[], customerId: string) {
   let reply = "";
   for (let pass = 1; pass <= MAX_TOOL_ROUNDS + 1; pass++) {
     const t0 = performance.now();
-    const response = await ai.models.generateContent({
-      model: MODEL,
+    const response = await generate({
       contents,
       config: {
         systemInstruction: systemPrompt(customer),
