@@ -1,4 +1,5 @@
 import { AgentDemo } from "@/components/AgentDemo";
+import { Integrate } from "@/components/Integrate";
 import { Footer, Header, Hero } from "@/components/Chrome";
 import { APP } from "@/app.config";
 import { CUSTOMERS, ORDERS } from "@/lib/store";
@@ -82,6 +83,20 @@ export default function Page() {
             chat and WooCommerce for fixed demo orders.
           </p>
         </section>
+        <Integrate
+          c={{
+            title: "Put this agent on your own WhatsApp number",
+            intro: "Customers keep messaging the number they already use. Behind it, the agent reads your real orders and answers in seconds, day and night, and hands anything else to your team.",
+            options: [
+              { name: "Connect your WhatsApp Business number", detail: "Through Meta's official WhatsApp Cloud API, not an unofficial app, so your number is not at risk of being banned. Messages arrive by a signed webhook." },
+              { name: "Connect your store", detail: "WooCommerce or Shopify with read-only API keys, stored encrypted. Another system, such as a custom backend or ERP, works through its API." },
+              { name: "Set your rules", detail: "Your tone, your shipping and return policies, which questions it may answer, and when to hand over to a person. Customers only ever see orders that belong to their own number." },
+              { name: "Watch every conversation", detail: "Every AI reply and order lookup is logged, so you can check exactly what the agent saw and said if a customer complains." },
+            ],
+            needs: ["A Meta Business account (I guide you through verification)", "A phone number for WhatsApp Business", "Admin access to your store to create read-only API keys"],
+            timeline: "Live in about a week. Most of the waiting is Meta's business verification.",
+          }}
+        />
       </main>
       <Footer />
     </>
